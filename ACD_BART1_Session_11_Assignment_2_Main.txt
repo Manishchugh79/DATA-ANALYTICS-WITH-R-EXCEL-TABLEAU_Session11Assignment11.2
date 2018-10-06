@@ -37,12 +37,80 @@ Not Applicable
    Problem Statement
 1. Use the given link below and locate the bank marketing dataset. Data Set Link
 Perform the below operations:
+
 a. Is there any association between Job and default?
+Answer:
+> chisq.test(bank$job ,bank$default)
+
+	Pearson's Chi-squared test
+
+data:  bank$job and bank$default
+X-squared = 9.3064, df = 11, p-value = 0.5936
+
+# as p-value is > 0.05 there is no association between job and default
+
+	
 b. Is there any significant difference in duration of last call between people having housing loan or not?
+Answer:
+
+> library(ggplot2)
+> bank$duration<-as.numeric(bank$duration)
+> ggplot(bank, aes(x=bank$duration, fill=bank$loan))+geom_histogram()
+> ggplot(bank, aes(x=bank$loan,y=bank$duration, fill=bank$loan))+geom_point()
+> 
+# As per the plot it is concluded that duration of last call between people having no housing loan is higher that with people having housing loan.
+
+plot saved on github id: DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2b Call duration difference amongst  people having housing loan or not.png
+
+      
 c. Is there any association between consumer price index and consumer?
+Answer:
+
+> bank.additional.full <- read.csv("C:/Users/Manish Chugh/Desktop/ACADGILD/Excel files/bank-additional-full.csv", sep=";")
+>   View(bank.additional.full)
+
+> ggplot(bank.additional.full, aes(x=bank.additional.full$cons.price.idx, y= bank.additional.full$cons.conf.idx, fill=bank.additional.full$cons.conf.idx))+geom_point()
+plot path: DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2c association between consumer price index and consumer.png
+       
+> ggplot(bank.additional.full, aes(x = cons.price.idx)) + geom_histogram(binwidth = 1) + theme_bw() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+plot path: DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2c association between cons.price.idx and cons.conf.idx.png
+        DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2c association between consumer price index and consumer.png
+      
+> ggplot(bank.additional.full) + geom_histogram(aes(x = cons.price.idx), binwidth = 1) +
++   facet_grid(y~., scales = "free")  + theme_bw() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+> 
+Plot path: DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2c Association between cons.price.idx and customer with bank loan and no loan.png
+      
+
 d. Is the employment variation rate consistent across job types?
+Answer: 
+# dataset: bank.additional.full
+# Using Pearson's Chi-squared Test
+# using ggplot 
+
+> chisq.test(bank.additional.full$emp.var.rate ,bank.additional.full$job)
+
+	Pearson's Chi-squared test
+
+data:  bank.additional.full$emp.var.rate and bank.additional.full$job
+X-squared = 4676.8, df = 99, p-value < 2.2e-16
+
+ggplot(bank.additional.full, aes(x=bank.additional.full$emp.var.rate, y=bank.additional.full$job))+geom_jitter()
+plot path: DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2d emp.var.rate vs job types.png
+      
+
 e. Is the employment variation rate same across education?
+Answer:
+
+< ggplot(bank.additional.full, aes(x=bank.additional.full$emp.var.rate, y=bank.additional.full$education))+geom_jitter()
+
+#Employment variation rate is not same as per the above plot
+# Higher the education, Higher job profile
+
+plot path: DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2e emp.var.rate vs education.png
+      
 f. Which group is more confident?
+Answer:
 
 
    Expected Output
