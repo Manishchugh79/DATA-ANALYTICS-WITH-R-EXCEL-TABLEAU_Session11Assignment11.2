@@ -112,6 +112,13 @@ plot path: DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.2/11.2e emp
 f. Which group is more confident?
 Answer:
 
+> chisq.test(bank.additional.full$cons.conf.idx, bank.additional.full$marital)
+
+	Pearson's Chi-squared test
+
+data:  bank.additional.full$cons.conf.idx and bank.additional.full$marital
+X-squared = 1037, df = 75, p-value < 2.2e-16
+
 
    Expected Output
 Not Applicable
